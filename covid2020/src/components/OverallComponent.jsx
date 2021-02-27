@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {readString} from 'react-papaparse'
-import ReactDOM from 'react-dom'
 import "./OverallComponent.css"
 import axios from "axios"
 
@@ -24,11 +23,9 @@ class OverallComponent extends Component {
             const testdetails = readString(response.data)
             const testdetailslength = testdetails.data.length
             const asof = String(testdetails.data[testdetailslength-1][1])
-            this.state.asofdate = asof.split("/")[0]
-            this.state.asofmonth = this.MonthArray[asof.split("/")[1]]
-            this.state.testcompleted = (Number(testdetails.data[testdetailslength-1][3])).toLocaleString("en-IN")
-            ReactDOM.render(<p id="testcompleted">{this.state.testcompleted}</p>,document.getElementById("testcompleted"))
-            ReactDOM.render(<p id="asof">As of {this.state.asofdate} {this.state.asofmonth}</p>,document.getElementById("asof"))
+            this.setState ({ asofdate : asof.split("/")[0] })
+            this.setState ({ asofmonth : this.MonthArray[asof.split("/")[1]]})
+            this.setState ({ testcompleted : (Number(testdetails.data[testdetailslength-1][3])).toLocaleString("en-IN")})
         })
         .catch(error =>{
             console.log(error)
@@ -50,8 +47,8 @@ class OverallComponent extends Component {
                 </div>
                 <div className = "overallsubcontainer2">
                     <p>Tested</p>
-                    <div id = "testcompleted"></div>
-                    <div id = "asof"></div>
+                    <p id="testcompleted">{this.state.testcompleted}</p>
+                    <p id="asof">As of {this.state.asofdate} {this.state.asofmonth}</p>
                     <p>per <span className = "source">source</span></p>
                 </div>
             </div>
