@@ -1,0 +1,32 @@
+.statecontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+table{
+    border-collapse: separate;
+    border: 1px solid transparent; 
+    border-spacing: 8px;
+}
+
+tr,td{
+    background-color: rgb(235, 228, 235);
+    height: 60px;
+    border-radius: 5px;
+    width: 150px;
+    text-align: center;
+    padding: 5px;
+    font-size: 18px;
+}
+
+tr:first-child{
+    font-weight: 600;
+    font-size: 23px;
+}
+
+.firstcolumn{
+    font-weight: 600;
+}

@@ -24,8 +24,8 @@ class OverallComponent extends Component {
             const testdetailslength = testdetails.data.length
             const asof = String(testdetails.data[testdetailslength-1][1])
             this.setState ({ asofdate : asof.split("/")[0] })
-            this.setState ({ asofmonth : this.MonthArray[asof.split("/")[1]]})
-            this.setState ({ testcompleted : (Number(testdetails.data[testdetailslength-1][3])).toLocaleString("en-IN")})
+            this.setState ({ asofmonth : this.MonthArray[asof.split("/")[1] - 1]})
+            this.setState ({ testcompleted : (Number(testdetails.data[testdetailslength-1][4])).toLocaleString("en-IN")})
         })
         .catch(error =>{
             console.log(error)
