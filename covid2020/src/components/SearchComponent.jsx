@@ -53,9 +53,12 @@ class SearchComponent extends Component {
                 let increased_confirm_cases = this.state.CurrentConfirmedCases[State_Wise_Daily_Index] - this.state.PreviousConfirmedCases[State_Wise_Daily_Index]
                 let increased_recover_cases = this.state.CurrentRecoveredCases[State_Wise_Daily_Index] - this.state.PreviousRecoveredCases[State_Wise_Daily_Index] 
                 let increased_deceased_cases = this.state.CurrentDeceasedCases[State_Wise_Daily_Index] - this.state.PreviousDeceasedCases[State_Wise_Daily_Index]
-                ReactDOM.render(<p>+ {increased_confirm_cases}</p>,document.getElementById("confirmedincreasedcases"))
-                ReactDOM.render(<p>+ {increased_recover_cases}</p>,document.getElementById("recoveredincreasedcases"))
-                ReactDOM.render(<p>+ {increased_deceased_cases}</p>,document.getElementById("deceasedincreasedcases"))
+                let sign_increased_confirm_cases = increased_confirm_cases < 0 ? '-' : '+'
+                let sign_increased_recover_cases = increased_recover_cases < 0 ? '-' : '+'
+                let sign_increased_deceased_cases = increased_deceased_cases < 0 ? '-' : '+'
+                ReactDOM.render(<p> {sign_increased_confirm_cases} {Math.abs(increased_confirm_cases)}</p>,document.getElementById("confirmedincreasedcases"))
+                ReactDOM.render(<p> {sign_increased_recover_cases} {Math.abs(increased_recover_cases)}</p>,document.getElementById("recoveredincreasedcases"))
+                ReactDOM.render(<p> {sign_increased_deceased_cases} {Math.abs(increased_deceased_cases)}</p>,document.getElementById("deceasedincreasedcases"))
             }
         })
         this.State_Wise.map(item => {

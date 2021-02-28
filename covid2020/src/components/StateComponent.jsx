@@ -8,6 +8,29 @@ class StateComponent extends Component {
         this.State_Wise_Updated = {}
     }
 
+    SortBasedOnRecoveryRate = () => {
+         let Temp_State_Array = [];
+         for (let Property in this.State_Wise_Updated) {
+            if (this.State_Wise_Updated.hasOwnProperty(Property)) {
+                let Temp_State_Object = {};
+                Temp_State_Object[Property] = this.State_Wise_Updated[Property];
+                Temp_State_Object.tempRecoveryRate = this.State_Wise_Updated[Property]["Recovery_Rate"]
+                Temp_State_Array.push(Temp_State_Object);
+               }
+          }
+        Temp_State_Array.sort( (item1, item2) => {
+            return item1.tempRecoveryRate < item2.tempRecoveryRate ? 1 : ( item1.tempRecoveryRate > item2.tempRecoveryRate ? -1 : 0 );
+        })
+        let Sorted_State_Object = {}
+        for (let i=0; i < Temp_State_Array.length ; i++) {
+            let Temp_State_Object = Temp_State_Array[i];
+            delete Temp_State_Object.tempRecoveryRate;
+            let State_Object_Key = Object.keys(Temp_State_Object)[0]
+            Sorted_State_Object[State_Object_Key] = Temp_State_Object[State_Object_Key];
+            }
+        this.State_Wise_Updated =  Sorted_State_Object
+    }
+
     CalculateRecoveryRate = () => {
         Service.State_Wise_Data[0].map((item) => {
             let State_Object = {}
@@ -21,6 +44,7 @@ class StateComponent extends Component {
             else
                 this.State_Wise_Updated[item[0]] = State_Object
         })
+        this.SortBasedOnRecoveryRate()
     }
 
     renderOutput = () => {
